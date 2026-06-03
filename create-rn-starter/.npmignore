@@ -1,0 +1,17 @@
+# Whitelisting is handled by the "files" field in package.json.
+# This file only guards against accidental local cruft inside the template.
+template/node_modules
+template/ios/Pods
+template/ios/build
+template/ios/Podfile.lock
+template/android/build
+template/android/.gradle
+template/android/.cxx
+template/android/app/build
+template/android/local.properties
+template/**/xcuserdata
+template/**/*.xcuserstate
+template/vendor
+template/.bundle
+**/.DS_Store
+*.log

@@ -1,0 +1,38 @@
+{
+  "name": "@varunindiit/create-rn-starter",
+  "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Production-ready React Native CLI starter: React Navigation auth flow, bottom tabs, Redux Toolkit, theming, i18n, SVG support, MMKV storage, API/service layer and reusable components. Scaffolds a fully renamed Android + iOS project in seconds.",
+  "type": "commonjs",
+  "bin": {
+    "create-rn-starter": "bin/index.js"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "template"
+  ],
+  "scripts": {
+    "lint": "node --check bin/index.js && node --check lib/utils.js && node --check lib/prompt.js && node --check lib/rename.js && node --check lib/scaffold.js && node --check scripts/smoke.js",
+    "test": "node scripts/smoke.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "react-native",
+    "react-native-cli",
+    "starter",
+    "template",
+    "boilerplate",
+    "redux",
+    "react-navigation",
+    "typescript",
+    "scaffold",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT"
+}
