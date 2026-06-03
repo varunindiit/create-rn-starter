@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
+import BottomTabBar from "../components/BottomTabBar";
 import Home from "../screen/root/home";
 import Profile from "../screen/root/profile";
-import { THEME } from "../theme";
 import RouteKey from "./RouteKey";
 import { UserTabParamList } from "./paramLists";
 
@@ -12,21 +12,12 @@ const BottomTabs = () => (
   <Tab.Navigator
     screenOptions={{
       headerShown: false,
-      tabBarActiveTintColor: THEME.tabActive,
-      tabBarInactiveTintColor: THEME.tabInactive,
-      sceneStyle: { backgroundColor: THEME.background },
+      sceneStyle: { backgroundColor: "transparent" },
     }}
+    tabBar={props => <BottomTabBar {...props} />}
   >
-    <Tab.Screen
-      name={RouteKey.UserHome}
-      component={Home}
-      options={{ tabBarLabel: "Home" }}
-    />
-    <Tab.Screen
-      name={RouteKey.UserProfile}
-      component={Profile}
-      options={{ tabBarLabel: "Profile" }}
-    />
+    <Tab.Screen name={RouteKey.UserHome} component={Home} />
+    <Tab.Screen name={RouteKey.UserProfile} component={Profile} />
   </Tab.Navigator>
 );
 
