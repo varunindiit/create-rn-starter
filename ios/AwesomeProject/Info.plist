@@ -28,14 +28,44 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-	  <!-- Do not change NSAllowsArbitraryLoads to true, or you will risk app rejection! -->
 		<key>NSAllowsArbitraryLoads</key>
 		<false/>
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs camera access to take photos for your profile and uploads.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) uses your location to show nearby results and share trip updates.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>$(PRODUCT_NAME) uses your location to show nearby results and share trip updates.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs microphone access for recording media.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs permission to save photos to your library.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs access to your photo library so you can choose photos.</string>
+	<key>RCTNewArchEnabled</key>
+	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>MonaSans-ExtraLightItalic.ttf</string>
+		<string>MonaSans-SemiBoldItalic.ttf</string>
+		<string>MonaSans-BoldItalic.ttf</string>
+		<string>MonaSans-ExtraLight.ttf</string>
+		<string>MonaSans-ExtraBoldItalic.ttf</string>
+		<string>MonaSans-Regular.ttf</string>
+		<string>MonaSans-Black.ttf</string>
+		<string>MonaSans-Medium.ttf</string>
+		<string>MonaSans-LightItalic.ttf</string>
+		<string>MonaSans-ExtraBold.ttf</string>
+		<string>MonaSans-Italic.ttf</string>
+		<string>MonaSans-Bold.ttf</string>
+		<string>MonaSans-Light.ttf</string>
+		<string>MonaSans-MediumItalic.ttf</string>
+		<string>MonaSans-SemiBold.ttf</string>
+		<string>MonaSans-BlackItalic.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

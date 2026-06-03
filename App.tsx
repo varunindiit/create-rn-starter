@@ -1,45 +1,100 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import React, { useEffect } from "react";
 import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+  Platform,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+import { hideSplash } from "react-native-splash-view";
+import { moderateScale } from "react-native-size-matters";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Provider } from "react-redux";
+import { KeyboardProvider } from "react-native-keyboard-controller";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import FlashMessage from "react-native-flash-message";
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+import store from "./src/redux/store";
+import { THEME } from "./src/theme";
+import StackNavigation from "./src/navigation/StackNavigation";
+import "./src/localization/i18n";
 
+const setupFontScaling = () => {
+  if ((Text as any).defaultProps) {
+    (Text as any).defaultProps.allowFontScaling = false;
+  } else {
+    (Text as any).defaultProps = { allowFontScaling: false };
+  }
+  if ((TextInput as any).defaultProps) {
+    (TextInput as any).defaultProps.allowFontScaling = false;
+  } else {
+    (TextInput as any).defaultProps = { allowFontScaling: false };
+  }
+};
+
+setupFontScaling();
+
+const FlashMessageView = ({ message }: any) => (
+  <View style={styles.flashMessage}>
+    <Text style={styles.flashMessageText}>
+      {message.description || message.message || "Default message"}
+    </Text>
+  </View>
+);
+
+const App = () => {
+  useEffect(() => {
+    hideSplash();
+  }, []);
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
+    <GestureHandlerRootView style={styles.container}>
+      <SafeAreaProvider>
+        <Provider store={store}>
+          <KeyboardProvider>
+            <NavigationContainer>
+              <FlashMessage
+                position="top"
+                duration={1500}
+                statusBarHeight={
+                  Platform.OS === "ios" ? moderateScale(50) : moderateScale(40)
+                }
+                MessageComponent={(props: any) => (
+                  <FlashMessageView {...props} />
+                )}
+              />
+              <StatusBar
+                backgroundColor="transparent"
+                barStyle="light-content"
+                translucent
+              />
+              <StackNavigation />
+            </NavigationContainer>
+          </KeyboardProvider>
+        </Provider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
-}
+};
 
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
+export default App;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  flashMessage: {
+    marginTop: moderateScale(40),
+    backgroundColor: "#1B2148",
+    paddingVertical: moderateScale(10),
+    paddingHorizontal: moderateScale(15),
+    borderRadius: moderateScale(8),
+    marginHorizontal: moderateScale(12),
+  },
+  flashMessageText: {
+    color: "#fff",
+    fontSize: moderateScale(12),
+    fontWeight: "600",
+  },
 });
-
-export default App;

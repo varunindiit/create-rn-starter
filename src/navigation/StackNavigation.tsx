@@ -1,36 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsLoggedIn, setRole } from "../redux/slice/auth";
+import { setIsLoggedIn } from "../redux/slice/auth";
 import { RootState } from "../redux/store";
-import { storage } from "../services/storage";
-import { IS_LOGGED_IN, ROLE_KEY } from "../utils/constants";
+import { getStorageBoolean } from "../services/storage";
+import { IS_LOGGED_IN } from "../utils/constants";
 import AuthNavigation from "./AuthNavigation";
 import RootNavigation from "./RootNavigation";
 import RouteKey from "./RouteKey";
 import { THEME } from "../theme";
-import LanguageSelection from "../screen/onboarding/LanguageSelection";
 
 const Stack = createNativeStackNavigator();
 
+/**
+ * Top-level navigator and auth guard. The session flag in redux decides
+ * whether the Auth stack or the Root (app) stack is mounted, so toggling
+ * `isLoggedIn` swaps the whole tree declaratively — no imperative navigation
+ * needed on login/logout.
+ */
 const StackNavigation = () => {
-  const { isLoggedIn } = useSelector((s: RootState) => s.auth);
-  const languageSelected = useSelector(
-    (s: RootState) => s.app.languageSelected,
-  );
+  const isLoggedIn = useSelector((s: RootState) => s.auth.isLoggedIn);
   const dispatch = useDispatch();
   const [bootstrapped, setBootstrapped] = useState(false);
 
+  // Restore the persisted (dummy) session before rendering the tree.
   useEffect(() => {
-    const isLogged = storage.getBoolean(IS_LOGGED_IN) || false;
-    const role =
-      (storage.getString(ROLE_KEY) as "passenger" | "driver") || "passenger";
-    dispatch(setIsLoggedIn(isLogged));
-    dispatch(setRole(role));
+    dispatch(setIsLoggedIn(getStorageBoolean(IS_LOGGED_IN) || false));
     setBootstrapped(true);
   }, [dispatch]);
 
-  if (!bootstrapped) return null;
+  if (!bootstrapped) {
+    return null;
+  }
 
   return (
     <Stack.Navigator
@@ -39,13 +40,7 @@ const StackNavigation = () => {
         contentStyle: { backgroundColor: THEME.background },
       }}
     >
-      {!languageSelected ? (
-        // First-launch step — shown before auth/splash content.
-        <Stack.Screen
-          name={RouteKey.LanguageSelection}
-          component={LanguageSelection}
-        />
-      ) : isLoggedIn ? (
+      {isLoggedIn ? (
         <Stack.Screen name={RouteKey.AppStack} component={RootNavigation} />
       ) : (
         <Stack.Screen name={RouteKey.AuthStack} component={AuthNavigation} />

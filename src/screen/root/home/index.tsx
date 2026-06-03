@@ -1,12 +1,36 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { moderateScale } from "react-native-size-matters";
+import { FONTS } from "../../../theme/fonts";
+import { THEME } from "../../../theme";
 
-export default function Home() {
+const Home = () => {
   return (
-    <View>
-      <Text>Home</Text>
-    </View>
-  )
-}
+    <SafeAreaView style={styles.container}>
+      <View style={styles.content}>
+        <Text style={styles.title}>Home Screen</Text>
+      </View>
+    </SafeAreaView>
+  );
+};
 
-const styles = StyleSheet.create({})
+export default Home;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: THEME.background,
+  },
+  content: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: moderateScale(24),
+  },
+  title: {
+    fontFamily: FONTS.bold,
+    fontSize: moderateScale(22),
+    color: THEME.text,
+  },
+});

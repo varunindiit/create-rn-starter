@@ -7,23 +7,56 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C2943F07E7F4DE4938BB024 /* MonaSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80806B4F46EF4862AC548C20 /* MonaSans-LightItalic.ttf */; };
+		0C717F966009451784F1D847 /* MonaSans-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E584D7ED7D5C43DDB07E4480 /* MonaSans-Black.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-AwesomeProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-AwesomeProject.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		1ABDF14C27CC4C7AA9E24C14 /* MonaSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E52AB2AC41A04EC0AC666C56 /* MonaSans-ExtraBold.ttf */; };
+		42808AD11A844AEE907FF4B2 /* MonaSans-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 924BBE36025A4A84B1EC250E /* MonaSans-ExtraLightItalic.ttf */; };
+		54D3DF2C43B54C658E1BA79C /* MonaSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2ED5D48EB2034EB2A5AA9662 /* MonaSans-Italic.ttf */; };
+		66651E0C08AD44C89E3EC9D7 /* MonaSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91C2901552B44E3EB3722D1D /* MonaSans-Light.ttf */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
+		7C7DEAC5AE3B487180B74E5A /* MonaSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BA9745B59F04CC980784C54 /* MonaSans-Bold.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		943A9252767449AD9C70DECC /* MonaSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 56FC6FBC2F3E469CAC8F1430 /* MonaSans-ExtraBoldItalic.ttf */; };
+		98E6D1E8086F43D5BB7634B5 /* MonaSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D30F8AAD37447AF95D50C12 /* MonaSans-ExtraLight.ttf */; };
+		9F7D72DC9F8942FF9C0B70BE /* MonaSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F69EF7D07674C428CB0E5BF /* MonaSans-SemiBold.ttf */; };
+		A02059668A554425A2D22BC3 /* MonaSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4AC637F1158A4BF58663789F /* MonaSans-Medium.ttf */; };
+		A7AD9EBD4FFB44D080AAA644 /* MonaSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E21A7CD19ED9425CBE11D220 /* MonaSans-MediumItalic.ttf */; };
+		A8079B796971407D82B11F8A /* MonaSans-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DC03671BBAF4994A5947B8F /* MonaSans-BlackItalic.ttf */; };
+		B8698930A81F2A8FA0463B44 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		C7E108896993470883F1FDBC /* MonaSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4F7A602D5DF4E8CBB0FD8C9 /* MonaSans-Regular.ttf */; };
+		E056BC997DDA4B689C115112 /* MonaSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F28194E2161D49B3B25A690B /* MonaSans-SemiBoldItalic.ttf */; };
+		E8FDEF0FFD1249D4AC1FEFF9 /* MonaSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 32F72A451DF34646889F6DE6 /* MonaSans-BoldItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F69EF7D07674C428CB0E5BF /* MonaSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-SemiBold.ttf"; path = "../src/assets/fonts/MonaSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* AwesomeProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AwesomeProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = AwesomeProject/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = AwesomeProject/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = AwesomeProject/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2ED5D48EB2034EB2A5AA9662 /* MonaSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-Italic.ttf"; path = "../src/assets/fonts/MonaSans-Italic.ttf"; sourceTree = "<group>"; };
+		32F72A451DF34646889F6DE6 /* MonaSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-BoldItalic.ttf"; path = "../src/assets/fonts/MonaSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-AwesomeProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject.debug.xcconfig"; path = "Target Support Files/Pods-AwesomeProject/Pods-AwesomeProject.debug.xcconfig"; sourceTree = "<group>"; };
+		3DC03671BBAF4994A5947B8F /* MonaSans-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-BlackItalic.ttf"; path = "../src/assets/fonts/MonaSans-BlackItalic.ttf"; sourceTree = "<group>"; };
+		4AC637F1158A4BF58663789F /* MonaSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-Medium.ttf"; path = "../src/assets/fonts/MonaSans-Medium.ttf"; sourceTree = "<group>"; };
+		4BA9745B59F04CC980784C54 /* MonaSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-Bold.ttf"; path = "../src/assets/fonts/MonaSans-Bold.ttf"; sourceTree = "<group>"; };
+		56FC6FBC2F3E469CAC8F1430 /* MonaSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/MonaSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-AwesomeProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject.release.xcconfig"; path = "Target Support Files/Pods-AwesomeProject/Pods-AwesomeProject.release.xcconfig"; sourceTree = "<group>"; };
+		5D30F8AAD37447AF95D50C12 /* MonaSans-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-ExtraLight.ttf"; path = "../src/assets/fonts/MonaSans-ExtraLight.ttf"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-AwesomeProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AwesomeProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = AwesomeProject/AppDelegate.swift; sourceTree = "<group>"; };
+		80806B4F46EF4862AC548C20 /* MonaSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-LightItalic.ttf"; path = "../src/assets/fonts/MonaSans-LightItalic.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AwesomeProject/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		91C2901552B44E3EB3722D1D /* MonaSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-Light.ttf"; path = "../src/assets/fonts/MonaSans-Light.ttf"; sourceTree = "<group>"; };
+		924BBE36025A4A84B1EC250E /* MonaSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-ExtraLightItalic.ttf"; path = "../src/assets/fonts/MonaSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		E21A7CD19ED9425CBE11D220 /* MonaSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-MediumItalic.ttf"; path = "../src/assets/fonts/MonaSans-MediumItalic.ttf"; sourceTree = "<group>"; };
+		E52AB2AC41A04EC0AC666C56 /* MonaSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-ExtraBold.ttf"; path = "../src/assets/fonts/MonaSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		E584D7ED7D5C43DDB07E4480 /* MonaSans-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-Black.ttf"; path = "../src/assets/fonts/MonaSans-Black.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F28194E2161D49B3B25A690B /* MonaSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-SemiBoldItalic.ttf"; path = "../src/assets/fonts/MonaSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		F4F7A602D5DF4E8CBB0FD8C9 /* MonaSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MonaSans-Regular.ttf"; path = "../src/assets/fonts/MonaSans-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +71,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AAAEB7F91434154B69E25E9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				924BBE36025A4A84B1EC250E /* MonaSans-ExtraLightItalic.ttf */,
+				F28194E2161D49B3B25A690B /* MonaSans-SemiBoldItalic.ttf */,
+				32F72A451DF34646889F6DE6 /* MonaSans-BoldItalic.ttf */,
+				5D30F8AAD37447AF95D50C12 /* MonaSans-ExtraLight.ttf */,
+				56FC6FBC2F3E469CAC8F1430 /* MonaSans-ExtraBoldItalic.ttf */,
+				F4F7A602D5DF4E8CBB0FD8C9 /* MonaSans-Regular.ttf */,
+				E584D7ED7D5C43DDB07E4480 /* MonaSans-Black.ttf */,
+				4AC637F1158A4BF58663789F /* MonaSans-Medium.ttf */,
+				80806B4F46EF4862AC548C20 /* MonaSans-LightItalic.ttf */,
+				E52AB2AC41A04EC0AC666C56 /* MonaSans-ExtraBold.ttf */,
+				2ED5D48EB2034EB2A5AA9662 /* MonaSans-Italic.ttf */,
+				4BA9745B59F04CC980784C54 /* MonaSans-Bold.ttf */,
+				91C2901552B44E3EB3722D1D /* MonaSans-Light.ttf */,
+				E21A7CD19ED9425CBE11D220 /* MonaSans-MediumItalic.ttf */,
+				0F69EF7D07674C428CB0E5BF /* MonaSans-SemiBold.ttf */,
+				3DC03671BBAF4994A5947B8F /* MonaSans-BlackItalic.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* AwesomeProject */ = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +130,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				0AAAEB7F91434154B69E25E9 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -159,6 +216,23 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				42808AD11A844AEE907FF4B2 /* MonaSans-ExtraLightItalic.ttf in Resources */,
+				E056BC997DDA4B689C115112 /* MonaSans-SemiBoldItalic.ttf in Resources */,
+				E8FDEF0FFD1249D4AC1FEFF9 /* MonaSans-BoldItalic.ttf in Resources */,
+				98E6D1E8086F43D5BB7634B5 /* MonaSans-ExtraLight.ttf in Resources */,
+				943A9252767449AD9C70DECC /* MonaSans-ExtraBoldItalic.ttf in Resources */,
+				C7E108896993470883F1FDBC /* MonaSans-Regular.ttf in Resources */,
+				0C717F966009451784F1D847 /* MonaSans-Black.ttf in Resources */,
+				A02059668A554425A2D22BC3 /* MonaSans-Medium.ttf in Resources */,
+				0C2943F07E7F4DE4938BB024 /* MonaSans-LightItalic.ttf in Resources */,
+				1ABDF14C27CC4C7AA9E24C14 /* MonaSans-ExtraBold.ttf in Resources */,
+				54D3DF2C43B54C658E1BA79C /* MonaSans-Italic.ttf in Resources */,
+				7C7DEAC5AE3B487180B74E5A /* MonaSans-Bold.ttf in Resources */,
+				66651E0C08AD44C89E3EC9D7 /* MonaSans-Light.ttf in Resources */,
+				A7AD9EBD4FFB44D080AAA644 /* MonaSans-MediumItalic.ttf in Resources */,
+				9F7D72DC9F8942FF9C0B70BE /* MonaSans-SemiBold.ttf in Resources */,
+				A8079B796971407D82B11F8A /* MonaSans-BlackItalic.ttf in Resources */,
+				B8698930A81F2A8FA0463B44 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,9 +263,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AwesomeProject/Pods-AwesomeProject-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AwesomeProject/Pods-AwesomeProject-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -228,9 +306,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AwesomeProject/Pods-AwesomeProject-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AwesomeProject/Pods-AwesomeProject-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -258,6 +340,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VMZ7JTG4TU;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = AwesomeProject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
@@ -288,6 +371,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VMZ7JTG4TU;
 				INFOPLIST_FILE = AwesomeProject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -370,6 +454,10 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DRCT_REMOVE_LEGACY_ARCH=1",
+				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
@@ -377,8 +465,13 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
+					"-DRCT_REMOVE_LEGACY_ARCH=1",
 				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
+				USE_HERMES = true;
 			};
 			name = Debug;
 		};
@@ -435,6 +528,10 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DRCT_REMOVE_LEGACY_ARCH=1",
+				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
@@ -442,8 +539,12 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
+					"-DRCT_REMOVE_LEGACY_ARCH=1",
 				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
+				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

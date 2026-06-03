@@ -28,21 +28,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       in: window,
       launchOptions: launchOptions
     )
-
+showSplashScreen()
     return true
+  }
+  private func showSplashScreen() {
+    if let splashClass = NSClassFromString("SplashView") as? NSObject.Type,
+       let splashInstance = splashClass
+        .perform(NSSelectorFromString("sharedInstance"))?
+        .takeUnretainedValue() as? NSObject {
+      
+      splashInstance.perform(NSSelectorFromString("showSplash"))
+    } else {
+      print("SplashView module not found")
+    }
   }
 }
 
 class ReactNativeDelegate: RCTDefaultReactNativeFactoryDelegate {
+
   override func sourceURL(for bridge: RCTBridge) -> URL? {
-    self.bundleURL()
+    return self.bundleURL()
   }
 
   override func bundleURL() -> URL? {
 #if DEBUG
-    RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index")
+    return RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index")
 #else
-    Bundle.main.url(forResource: "main", withExtension: "jsbundle")
+    return Bundle.main.url(forResource: "main", withExtension: "jsbundle")
 #endif
   }
 }
