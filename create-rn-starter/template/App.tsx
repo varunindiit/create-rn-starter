@@ -12,12 +12,11 @@ import { moderateScale } from "react-native-size-matters";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Provider } from "react-redux";
 import { KeyboardProvider } from "react-native-keyboard-controller";
-import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import FlashMessage from "react-native-flash-message";
 
 import store from "./src/redux/store";
-import { THEME } from "./src/theme";
 import StackNavigation from "./src/navigation/StackNavigation";
 import "./src/localization/i18n";
 
@@ -44,6 +43,8 @@ const FlashMessageView = ({ message }: any) => (
   </View>
 );
 
+const renderFlashMessage = (props: any) => <FlashMessageView {...props} />;
+
 const App = () => {
   useEffect(() => {
     hideSplash();
@@ -60,9 +61,7 @@ const App = () => {
                 statusBarHeight={
                   Platform.OS === "ios" ? moderateScale(50) : moderateScale(40)
                 }
-                MessageComponent={(props: any) => (
-                  <FlashMessageView {...props} />
-                )}
+                MessageComponent={renderFlashMessage}
               />
               <StatusBar
                 backgroundColor="transparent"

@@ -36,12 +36,13 @@ const StarRating: React.FC<StarRatingProps> = ({
   <View style={styles.row}>
     {Array.from({ length: total }).map((_, i) => {
       const active = i < value;
+      const starStyle = { marginRight: i === total - 1 ? 0 : spacing };
       return (
         <Pressable
           key={i}
           disabled={disabled || !onChange}
           onPress={() => onChange?.(i + 1)}
-          style={{ marginRight: i === total - 1 ? 0 : spacing }}
+          style={starStyle}
           hitSlop={6}
         >
           <Star size={size} color={active ? color : inactiveColor} />

@@ -15,7 +15,6 @@ export const COLORS = {
   surface: "rgba(255, 251, 249, 1)",
   surfaceMuted: "#FAF7F4",
   overlay: "rgba(0,0,0,0.45)",
-  labelBrown: "rgba(122, 90, 58, 1)",
 
   // Text
   text: "rgba(44, 26, 14, 1)",
@@ -42,12 +41,8 @@ export const COLORS = {
   star: "#F4B400",
   unselectedStar: "#E5DAC9",
   shadow: "rgba(28, 22, 14, 0.10)",
-  greenDot: "#1FA971",
-  redDot: "#E5484D",
 
   // Tab bar
-  tabActive: "#F26B2A",
-  tabInactive: "#9A9A9A",
   tabBg: "#FFFFFF",
 };
 

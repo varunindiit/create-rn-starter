@@ -2,56 +2,12 @@
   "migIndex": 1,
   "data": [
     {
-      "path": "src/assets/fonts/MonaSans-Black.ttf",
-      "sha1": "75f7e1e1e069f539547a458418899df6652b1d2a"
-    },
-    {
-      "path": "src/assets/fonts/MonaSans-BlackItalic.ttf",
-      "sha1": "0a3684b5f269299ebcbf9070e99653722e8857c3"
-    },
-    {
       "path": "src/assets/fonts/MonaSans-Bold.ttf",
       "sha1": "c3b9802dcf48ac9ab8ce2bbf018797f90a6a04c0"
     },
     {
-      "path": "src/assets/fonts/MonaSans-BoldItalic.ttf",
-      "sha1": "9998bd29ee75d2444ce833f012241fe7192a48c3"
-    },
-    {
-      "path": "src/assets/fonts/MonaSans-ExtraBold.ttf",
-      "sha1": "9889945de5431204797518e2b47f3f9943e05ebb"
-    },
-    {
-      "path": "src/assets/fonts/MonaSans-ExtraBoldItalic.ttf",
-      "sha1": "a863a42f0a6b8d4027a225baa54586772ef94bb2"
-    },
-    {
-      "path": "src/assets/fonts/MonaSans-ExtraLight.ttf",
-      "sha1": "99954aad1238d2a30c901d037d73740097c32096"
-    },
-    {
-      "path": "src/assets/fonts/MonaSans-ExtraLightItalic.ttf",
-      "sha1": "e1eff64be2f4674f23f58a9c7d89b91532d995bd"
-    },
-    {
-      "path": "src/assets/fonts/MonaSans-Italic.ttf",
-      "sha1": "5d402013548b1f43fee563491c369e2972a5e734"
-    },
-    {
-      "path": "src/assets/fonts/MonaSans-Light.ttf",
-      "sha1": "3bee5ba8f953424e6fa113960b904873b31f4de3"
-    },
-    {
-      "path": "src/assets/fonts/MonaSans-LightItalic.ttf",
-      "sha1": "9b2b721296a76441cac29faa419a7d531deb0657"
-    },
-    {
       "path": "src/assets/fonts/MonaSans-Medium.ttf",
       "sha1": "ccd209ca1e4237925f3e4a6b0cf37391958add54"
-    },
-    {
-      "path": "src/assets/fonts/MonaSans-MediumItalic.ttf",
-      "sha1": "f342c671e70e118a4e7a3102e574751e8061ba92"
     },
     {
       "path": "src/assets/fonts/MonaSans-Regular.ttf",
@@ -60,10 +16,6 @@
     {
       "path": "src/assets/fonts/MonaSans-SemiBold.ttf",
       "sha1": "95a5be61d20315481ea8fa4429a30a8bbc48b1eb"
-    },
-    {
-      "path": "src/assets/fonts/MonaSans-SemiBoldItalic.ttf",
-      "sha1": "f88bc31eb1fb170654aea9375d05eb996cb7f085"
     }
   ]
 }

@@ -8,13 +8,17 @@ import { UserTabParamList } from "./paramLists";
 
 const Tab = createBottomTabNavigator<UserTabParamList>();
 
+const renderTabBar = (props: React.ComponentProps<typeof BottomTabBar>) => (
+  <BottomTabBar {...props} />
+);
+
 const BottomTabs = () => (
   <Tab.Navigator
     screenOptions={{
       headerShown: false,
       sceneStyle: { backgroundColor: "transparent" },
     }}
-    tabBar={props => <BottomTabBar {...props} />}
+    tabBar={renderTabBar}
   >
     <Tab.Screen name={RouteKey.UserHome} component={Home} />
     <Tab.Screen name={RouteKey.UserProfile} component={Profile} />

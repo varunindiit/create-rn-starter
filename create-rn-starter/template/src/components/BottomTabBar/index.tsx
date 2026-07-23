@@ -6,10 +6,6 @@ import { THEME } from "../../theme";
 
 import HomeActive from "../../assets/svg/homeActive.svg";
 import HomeUnActive from "../../assets/svg/homeUnActive.svg";
-import TripActive from "../../assets/svg/tripActive.svg";
-import TripUnActive from "../../assets/svg/tripUnActive.svg";
-import ChatActive from "../../assets/svg/chatActive.svg";
-import ChatUnActive from "../../assets/svg/chatUnActive.svg";
 import UserActive from "../../assets/svg/userActive.svg";
 import UserUnActive from "../../assets/svg/userUnActive.svg";
 
@@ -23,17 +19,10 @@ const ICON_MAP: Record<
   { Active: React.FC<any>; Inactive: React.FC<any> }
 > = {
   Home: { Active: HomeActive, Inactive: HomeUnActive },
-  Trips: { Active: TripActive, Inactive: TripUnActive },
-  Messages: { Active: ChatActive, Inactive: ChatUnActive },
   Profile: { Active: UserActive, Inactive: UserUnActive },
 };
 
-const tabKey = (name: string) => {
-  if (name.includes("Home")) return "Home";
-  if (name.includes("Trips")) return "Trips";
-  if (name.includes("Messages")) return "Messages";
-  return "Profile";
-};
+const tabKey = (name: string) => (name.includes("Home") ? "Home" : "Profile");
 
 const BottomTabBar: React.FC<BottomTabBarProps> = ({ state, navigation }) => {
   const insets = useSafeAreaInsets();

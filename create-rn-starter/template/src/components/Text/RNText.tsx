@@ -3,15 +3,7 @@ import { Text, TextProps, TextStyle, StyleProp } from "react-native";
 import { moderateScale } from "react-native-size-matters";
 import { FONTS, THEME } from "../../theme";
 
-type FontKey =
-  | "light"
-  | "regular"
-  | "italic"
-  | "medium"
-  | "semibold"
-  | "bold"
-  | "extraBold"
-  | "black";
+type FontKey = keyof typeof FONTS;
 
 interface RNTextProps extends TextProps {
   size?: number;

@@ -287,6 +287,7 @@ export const getRouteAlternatives = async (
 };
 
 /** Decode a Google "encoded polyline" string into lat/lng coordinates. */
+/* eslint-disable no-bitwise -- polyline decoding is inherently bit-level */
 export const decodePolyline = (encoded: string): LocationValue[] => {
   const points: LocationValue[] = [];
   let index = 0;
@@ -318,3 +319,4 @@ export const decodePolyline = (encoded: string): LocationValue[] => {
 
   return points;
 };
+/* eslint-enable no-bitwise */

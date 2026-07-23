@@ -1,14 +1,8 @@
-/** Centralized route names for both User and Driver flows */
+/** Centralized route names */
 export enum RouteKey {
-  /* Onboarding */
-  LanguageSelection = "LanguageSelection",
-  LanguageSettings = "LanguageSettings",
-
   /* Stacks */
   AuthStack = "AuthStack",
   AppStack = "AppStack",
-  UserStack = "UserStack",
-  DriverStack = "DriverStack",
   BottomTabs = "BottomTabs",
 
   /* Auth */

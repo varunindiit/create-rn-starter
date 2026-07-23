@@ -95,6 +95,12 @@ const RNButton: React.FC<RNButtonProps> = ({
 
   const v = VARIANT_STYLES[variant];
 
+  const shellDynamic = {
+    height,
+    backgroundColor: v.bg,
+    borderColor: v.border,
+  };
+
   const inner =
     children ??
     (title ? (
@@ -115,13 +121,9 @@ const RNButton: React.FC<RNButtonProps> = ({
       onPressOut={onPressOut}
       style={[
         styles.shell,
-        {
-          height,
-          backgroundColor: v.bg,
-          borderColor: v.border,
-          borderWidth: variant === "outline" ? 1.2 : 0,
-          opacity: disabled ? 0.55 : 1,
-        },
+        shellDynamic,
+        variant === "outline" && styles.shellOutline,
+        disabled && styles.shellDisabled,
         styles.center,
         containerStyle,
         animatedStyle,
@@ -135,7 +137,14 @@ const RNButton: React.FC<RNButtonProps> = ({
 export default RNButton;
 
 const styles = StyleSheet.create({
+  shellOutline: {
+    borderWidth: 1.2,
+  },
+  shellDisabled: {
+    opacity: 0.55,
+  },
   shell: {
+    borderWidth: 0,
     borderRadius: SPACING.radiusPill,
     overflow: "hidden",
   },

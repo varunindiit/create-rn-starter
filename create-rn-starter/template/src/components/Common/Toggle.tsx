@@ -36,10 +36,8 @@ const Toggle: React.FC<ToggleProps> = ({ value, onChange, disabled }) => {
       hitSlop={6}
       style={[
         styles.track,
-        {
-          backgroundColor: value ? THEME.primary : "#E2D7CB",
-          opacity: disabled ? 0.4 : 1,
-        },
+        value ? styles.trackOn : styles.trackOff,
+        disabled && styles.trackDisabled,
       ]}
     >
       <Animated.View style={[styles.thumb, thumb]} />
@@ -50,6 +48,15 @@ const Toggle: React.FC<ToggleProps> = ({ value, onChange, disabled }) => {
 export default Toggle;
 
 const styles = StyleSheet.create({
+  trackOn: {
+    backgroundColor: THEME.primary,
+  },
+  trackOff: {
+    backgroundColor: "#E2D7CB",
+  },
+  trackDisabled: {
+    opacity: 0.4,
+  },
   track: {
     width: moderateScale(48),
     height: moderateScale(28),

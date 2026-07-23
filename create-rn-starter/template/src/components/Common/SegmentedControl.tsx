@@ -49,10 +49,7 @@ const SegmentedControl: React.FC<SegmentedControlProps> = ({
                 {t.label}
               </RNText>
               <View
-                style={[
-                  styles.underline,
-                  { backgroundColor: active ? THEME.primary : "transparent" },
-                ]}
+                style={[styles.underline, active && styles.underlineActive]}
               />
             </Pressable>
           );
@@ -69,12 +66,7 @@ const SegmentedControl: React.FC<SegmentedControlProps> = ({
           <Pressable
             key={t.key}
             onPress={() => onChange(t.key)}
-            style={[
-              styles.pill,
-              {
-                backgroundColor: active ? THEME.primary : "transparent",
-              },
-            ]}
+            style={[styles.pill, active && styles.pillActive]}
           >
             <RNText
               font={active ? "semibold" : "medium"}
@@ -106,6 +98,10 @@ const styles = StyleSheet.create({
     borderRadius: SPACING.radiusPill,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "transparent",
+  },
+  pillActive: {
+    backgroundColor: THEME.primary,
   },
   underlineContainer: {
     flexDirection: "row",
@@ -122,5 +118,9 @@ const styles = StyleSheet.create({
     height: moderateScale(2),
     width: "60%",
     borderRadius: moderateScale(2),
+    backgroundColor: "transparent",
+  },
+  underlineActive: {
+    backgroundColor: THEME.primary,
   },
 });
