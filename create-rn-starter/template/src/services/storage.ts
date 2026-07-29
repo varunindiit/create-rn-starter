@@ -1,33 +1,58 @@
-import { createMMKV } from "react-native-mmkv";
+import {createMMKV} from 'react-native-mmkv';
+import {SESSION_KEYS} from '../utils/constants';
 
 export const storage = createMMKV();
 
-// Get string
-export const getStorageValue = (KEY: string): string | null => {
-  return storage.getString(KEY) ?? null;
+/** Read a string, or null when unset. */
+export const getStorageValue = (key: string): string | null =>
+  storage.getString(key) ?? null;
+
+export const setStorageValue = (key: string, value: string) => {
+  storage.set(key, value);
 };
 
-// Set string
-export const setStorageValue = (KEY: string, value: string) => {
-  storage.set(KEY, value);
+export const getStorageBoolean = (key: string): boolean | undefined =>
+  storage.getBoolean(key);
+
+export const setStorageBoolean = (key: string, value: boolean) => {
+  storage.set(key, value);
 };
 
-// Get boolean
-export const getStorageBoolean = (KEY: string): boolean | undefined => {
-  return storage.getBoolean(KEY);
+/** Remove a single key. */
+export const clearStorageValue = (key: string) => {
+  storage.remove(key);
 };
 
-// Set boolean
-export const setStorageBoolean = (KEY: string, value: boolean) => {
-  storage.set(KEY, value);
+/**
+ * Read and parse a JSON value, returning `fallback` when the key is unset or
+ * the stored text is not valid JSON (which happens after a shape migration).
+ */
+export const getStorageObject = <T>(key: string, fallback: T): T => {
+  const raw = storage.getString(key);
+  if (!raw) return fallback;
+  try {
+    return JSON.parse(raw) as T;
+  } catch {
+    return fallback;
+  }
 };
 
-// Clear key
-export const clearStorageValue = (KEY: string) => {
-  storage.remove(KEY);
+export const setStorageObject = (key: string, value: unknown) => {
+  storage.set(key, JSON.stringify(value));
 };
 
-/** Clear all stored data (e.g. on logout) */
+/**
+ * Drop every session-scoped key on logout.
+ *
+ * Deliberately narrower than `clearAllStorage`: the user's language and theme
+ * are device preferences that should survive signing out. Add new session keys
+ * to `SESSION_KEYS` and they get cleared here automatically.
+ */
+export const clearSession = () => {
+  for (const key of SESSION_KEYS) storage.remove(key);
+};
+
+/** Wipe everything — account deletion, "reset app", or a failed migration. */
 export const clearAllStorage = () => {
   storage.clearAll();
 };

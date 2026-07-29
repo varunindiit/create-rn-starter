@@ -89,9 +89,55 @@ function bundleIdToPath(bundleId) {
   return bundleId.split(".");
 }
 
-/** Validate a reverse-DNS identifier (com.foo.bar). */
+/**
+ * Java/Kotlin keywords. A bundle identifier maps 1:1 onto a Java package path
+ * (`com.new.app` → `com/new/app`), and a segment that is a reserved word makes
+ * the generated `package com.new.app;` declaration uncompilable. Rejecting it
+ * up front beats a Gradle error twenty minutes later.
+ */
+const RESERVED_PACKAGE_SEGMENTS = new Set([
+  "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char",
+  "class", "const", "continue", "default", "do", "double", "else", "enum",
+  "extends", "final", "finally", "float", "for", "goto", "if", "implements",
+  "import", "instanceof", "int", "interface", "long", "native", "new",
+  "package", "private", "protected", "public", "return", "short", "static",
+  "strictfp", "super", "switch", "synchronized", "this", "throw", "throws",
+  "transient", "try", "void", "volatile", "while",
+  // Literals + Kotlin-only hard keywords that are equally unusable.
+  "true", "false", "null", "fun", "object", "val", "var", "when", "in", "is",
+  "typealias", "typeof",
+]);
+
+/** The reserved segments present in a bundle id (empty array when valid). */
+function reservedSegments(id) {
+  return String(id)
+    .split(".")
+    .filter((seg) => RESERVED_PACKAGE_SEGMENTS.has(seg.toLowerCase()));
+}
+
+/**
+ * Validate a reverse-DNS identifier (com.foo.bar).
+ *
+ * Requires at least two segments, each starting with a letter, and rejects
+ * segments that are Java/Kotlin reserved words.
+ */
 function isValidBundleId(id) {
-  return /^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)+$/.test(id);
+  if (!/^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)+$/.test(id)) return false;
+  return reservedSegments(id).length === 0;
+}
+
+/** Human-readable reason a bundle id was rejected, or `null` when it is valid. */
+function bundleIdError(id) {
+  if (!/^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)+$/.test(id)) {
+    return "Must be reverse-DNS, e.g. com.acme.myapp";
+  }
+  const reserved = reservedSegments(id);
+  if (reserved.length) {
+    return `"${reserved.join('", "')}" ${
+      reserved.length === 1 ? "is a" : "are"
+    } reserved Java/Kotlin word${reserved.length === 1 ? "" : "s"} — pick another segment.`;
+  }
+  return null;
 }
 
 /** Validate a project/slug name. */
@@ -117,6 +163,9 @@ module.exports = {
   defaultBundleId,
   bundleIdToPath,
   isValidBundleId,
+  bundleIdError,
+  reservedSegments,
+  RESERVED_PACKAGE_SEGMENTS,
   isValidSlug,
   resolveTarget,
 };

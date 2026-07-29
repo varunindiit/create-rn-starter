@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Image,
   ImageSourcePropType,
@@ -6,75 +6,72 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from "react-native";
-import { THEME } from "../../theme";
-import RNText from "../Text/RNText";
+} from 'react-native';
+import {SIZES} from '../../theme/spacing';
+import {useTheme} from '../../theme/ThemeProvider';
+import {initials} from '../../utils/functions';
+import RNText from '../Text/RNText';
 
 interface AvatarProps {
-  uri?: string;
+  uri?: string | null;
   source?: ImageSourcePropType;
   size?: number;
   name?: string;
   style?: StyleProp<ViewStyle>;
   ring?: boolean;
+  testID?: string;
 }
 
-const initials = (n?: string) =>
-  (n || "")
-    .split(/\s+/)
-    .map((s) => s[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-
-const DEFAULT_AVATAR_URI = "https://picsum.photos/200/300";
-
 const Avatar: React.FC<AvatarProps> = ({
-  uri = DEFAULT_AVATAR_URI,
+  uri,
   source,
-  size = 44,
+  size = SIZES.avatar,
   name,
   style,
-  ring,
+  ring = false,
+  testID = 'avatar',
 }) => {
-  const radius = size / 2;
-  const wrap = [
-    {
-      width: size,
-      height: size,
-      borderRadius: radius,
-      backgroundColor: THEME.primaryLight,
-    },
-    ring && { borderWidth: 2, borderColor: THEME.surface },
-    styles.center,
-    style,
-  ];
-  if (uri || source) {
-    return (
-      <View style={wrap}>
-        <Image
-          source={source ?? { uri }}
-          style={{ width: size, height: size, borderRadius: radius }}
-        />
-      </View>
-    );
-  }
+  const {colors} = useTheme();
+  const image = source ?? (uri ? {uri} : undefined);
+
   return (
-    <View style={wrap}>
-      <RNText
-        font="semibold"
-        size={Math.round(size * 0.36)}
-        color={THEME.primary}
-      >
-        {initials(name) || "U"}
-      </RNText>
+    <View
+      testID={testID}
+      accessible
+      accessibilityRole="image"
+      // Without a name there is nothing meaningful to announce, so fall back to
+      // a generic label rather than reading the raw image URI.
+      accessibilityLabel={name ? `${name}'s avatar` : 'Avatar'}
+      style={[
+        styles.wrap,
+        {
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+          backgroundColor: colors.primaryFaint,
+        },
+        ring && [styles.ring, {borderColor: colors.primary}],
+        style,
+      ]}>
+      {image ? (
+        <Image
+          source={image}
+          style={{width: size, height: size, borderRadius: size / 2}}
+          resizeMode="cover"
+        />
+      ) : (
+        <RNText font="semibold" size={size * 0.34} color={colors.primary}>
+          {initials(name) || '?'}
+        </RNText>
+      )}
     </View>
   );
 };
 
 export default Avatar;
+export type {AvatarProps};
 
 const styles = StyleSheet.create({
-  center: { alignItems: "center", justifyContent: "center", overflow: "hidden" },
+  wrap: {alignItems: 'center', justifyContent: 'center', overflow: 'hidden'},
+  ring: {borderWidth: 2},
 });

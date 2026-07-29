@@ -1,73 +1,84 @@
-import React, { useEffect } from "react";
-import { Pressable, StyleSheet } from "react-native";
+import React, {useEffect} from 'react';
+import {Pressable, StyleSheet} from 'react-native';
 import Animated, {
   Easing,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-} from "react-native-reanimated";
-import { moderateScale } from "react-native-size-matters";
-import { THEME } from "../../theme";
+} from 'react-native-reanimated';
+import {moderateScale} from 'react-native-size-matters';
+import {useTheme} from '../../theme/ThemeProvider';
 
 interface ToggleProps {
   value: boolean;
   onChange: (v: boolean) => void;
   disabled?: boolean;
+  testID?: string;
+  /** Required for a standalone switch; optional when a visible label sits beside it. */
+  accessibilityLabel?: string;
 }
 
-const Toggle: React.FC<ToggleProps> = ({ value, onChange, disabled }) => {
-  const tx = useSharedValue(value ? moderateScale(22) : 0);
+const TRAVEL = moderateScale(22);
+
+const Toggle: React.FC<ToggleProps> = ({
+  value,
+  onChange,
+  disabled,
+  testID,
+  accessibilityLabel,
+}) => {
+  const {colors} = useTheme();
+  const tx = useSharedValue(value ? TRAVEL : 0);
 
   useEffect(() => {
-    tx.value = withTiming(value ? moderateScale(22) : 0, {
+    tx.value = withTiming(value ? TRAVEL : 0, {
       duration: 160,
       easing: Easing.out(Easing.cubic),
     });
-  }, [tx, value]);
+  }, [value, tx]);
 
-  const thumb = useAnimatedStyle(() => ({
-    transform: [{ translateX: tx.value }],
+  const thumbStyle = useAnimatedStyle(() => ({
+    transform: [{translateX: tx.value}],
   }));
 
   return (
     <Pressable
+      testID={testID}
       disabled={disabled}
       onPress={() => onChange(!value)}
-      hitSlop={6}
+      // `switch` + checked state is what makes this announce as "on"/"off"
+      // rather than as an unlabelled tappable box.
+      accessibilityRole="switch"
+      accessibilityLabel={accessibilityLabel}
+      accessibilityState={{checked: value, disabled: !!disabled}}
+      hitSlop={8}
       style={[
         styles.track,
-        value ? styles.trackOn : styles.trackOff,
-        disabled && styles.trackDisabled,
-      ]}
-    >
-      <Animated.View style={[styles.thumb, thumb]} />
+        {backgroundColor: value ? colors.primary : colors.toggleTrack},
+        disabled && styles.disabled,
+      ]}>
+      <Animated.View
+        style={[styles.thumb, {backgroundColor: colors.toggleThumb}, thumbStyle]}
+      />
     </Pressable>
   );
 };
 
 export default Toggle;
+export type {ToggleProps};
 
 const styles = StyleSheet.create({
-  trackOn: {
-    backgroundColor: THEME.primary,
-  },
-  trackOff: {
-    backgroundColor: "#E2D7CB",
-  },
-  trackDisabled: {
-    opacity: 0.4,
-  },
   track: {
     width: moderateScale(48),
     height: moderateScale(28),
-    borderRadius: moderateScale(14),
+    borderRadius: 999,
     padding: moderateScale(3),
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   thumb: {
-    width: moderateScale(20),
-    height: moderateScale(20),
-    borderRadius: moderateScale(11),
-    backgroundColor: "#FFFFFF",
+    width: moderateScale(22),
+    height: moderateScale(22),
+    borderRadius: 999,
   },
+  disabled: {opacity: 0.5},
 });

@@ -51,11 +51,17 @@ function walk(dir, out = []) {
 }
 
 /**
- * Replace every source identifier with the user's values across all text
- * files. Longer keys are applied first so `org.reactjs.native…` and
- * `com.awesomeproject` are handled before the bare `awesomeproject`.
+ * Build the single combined pattern used for the token pass.
+ *
+ * Every source identifier is matched by ONE regex with a replacer callback, so
+ * each position in the input is substituted exactly once. Running the patterns
+ * sequentially instead would let a later pattern rewrite text an earlier one
+ * just inserted — e.g. with `--bundle-id com.awesomeproject.mobile`, replacing
+ * `com.awesomeproject` first and `awesomeproject` second yields the corrupt
+ * `com.mobile.mobile`. Alternatives are sorted longest-first because JS regex
+ * alternation is first-match (not longest-match) at each position.
  */
-function applyTokenReplacements(root, names) {
+function buildTokenPattern(names) {
   const tokens = {
     [SOURCE.iosDefaultBundleId]: names.bundleId,
     [SOURCE.bundleId]: names.bundleId,
@@ -63,10 +69,16 @@ function applyTokenReplacements(root, names) {
     [SOURCE.lowerName]: names.lowerName,
   };
   const ordered = Object.keys(tokens).sort((a, b) => b.length - a.length);
-  const patterns = ordered.map((key) => ({
-    re: new RegExp(escapeRegExp(key), "g"),
-    value: tokens[key],
-  }));
+  const re = new RegExp(ordered.map(escapeRegExp).join("|"), "g");
+  return { re, tokens };
+}
+
+/**
+ * Replace every source identifier with the user's values across all text
+ * files, in a single non-cascading pass.
+ */
+function applyTokenReplacements(root, names) {
+  const { re, tokens } = buildTokenPattern(names);
 
   let changed = 0;
   for (const file of walk(root)) {
@@ -77,8 +89,8 @@ function applyTokenReplacements(root, names) {
     } catch {
       continue; // unreadable / binary disguised as text — skip safely
     }
-    let next = content;
-    for (const { re, value } of patterns) next = next.replace(re, value);
+    re.lastIndex = 0;
+    const next = content.replace(re, (match) => tokens[match]);
     if (next !== content) {
       fs.writeFileSync(file, next);
       changed += 1;
@@ -231,6 +243,7 @@ function renameProject(root, names) {
 module.exports = {
   SOURCE,
   isTextFile,
+  buildTokenPattern,
   applyTokenReplacements,
   renameIosDirs,
   moveAndroidPackage,

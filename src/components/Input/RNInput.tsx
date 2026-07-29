@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, {useCallback, useId, useState} from 'react';
 import {
   StyleProp,
   StyleSheet,
@@ -7,11 +7,13 @@ import {
   TouchableOpacity,
   View,
   ViewStyle,
-} from "react-native";
-import { moderateScale } from "react-native-size-matters";
-import { FONTS, SPACING, THEME } from "../../theme";
-import RNText from "../Text/RNText";
-import { EyeIcon, EyeOffIcon } from "../Icon/SvgIcons";
+} from 'react-native';
+import {moderateScale} from 'react-native-size-matters';
+import {FONTS} from '../../theme/fonts';
+import {SPACING} from '../../theme/spacing';
+import {useTheme} from '../../theme/ThemeProvider';
+import RNText from '../Text/RNText';
+import {EyeIcon, EyeOffIcon} from '../Icon/SvgIcons';
 
 interface RNInputProps extends TextInputProps {
   label?: string;
@@ -23,6 +25,7 @@ interface RNInputProps extends TextInputProps {
   rightIcon?: React.ReactNode;
   onPressRightIcon?: () => void;
   focusedBorderColor?: string;
+  testID?: string;
 }
 
 const RNInput: React.FC<RNInputProps> = ({
@@ -34,23 +37,33 @@ const RNInput: React.FC<RNInputProps> = ({
   leftIcon,
   rightIcon,
   onPressRightIcon,
-  focusedBorderColor = THEME.primary,
+  focusedBorderColor,
   style,
   onFocus,
   onBlur,
+  testID,
+  accessibilityLabel,
   ...rest
 }) => {
+  const {colors} = useTheme();
   const [secureVisible, setSecureVisible] = useState(false);
   const [focused, setFocused] = useState(false);
+  const errorId = useId();
 
-  const toggleSecure = useCallback(() => setSecureVisible((v) => !v), []);
+  const toggleSecure = useCallback(() => setSecureVisible(v => !v), []);
 
   const right = secure ? (
-    <TouchableOpacity onPress={toggleSecure} hitSlop={10}>
+    <TouchableOpacity
+      onPress={toggleSecure}
+      hitSlop={10}
+      accessibilityRole="button"
+      accessibilityLabel={secureVisible ? 'Hide password' : 'Show password'}
+      accessibilityState={{selected: secureVisible}}
+      testID={testID ? `${testID}-toggle-secure` : undefined}>
       {secureVisible ? (
-        <EyeIcon color={THEME.textMuted} />
+        <EyeIcon color={colors.textMuted} />
       ) : (
-        <EyeOffIcon color={THEME.textMuted} />
+        <EyeOffIcon color={colors.textMuted} />
       )}
     </TouchableOpacity>
   ) : rightIcon ? (
@@ -58,51 +71,71 @@ const RNInput: React.FC<RNInputProps> = ({
       onPress={onPressRightIcon}
       hitSlop={10}
       disabled={!onPressRightIcon}
-    >
+      accessibilityRole="button"
+      accessibilityLabel={`${label ?? 'Input'} action`}
+      testID={testID ? `${testID}-action` : undefined}>
       {rightIcon}
     </TouchableOpacity>
   ) : null;
 
+  const borderColor = error
+    ? colors.danger
+    : focused
+    ? focusedBorderColor ?? colors.primary
+    : colors.inputBorder;
+
   return (
     <View style={[styles.wrap, containerStyle]}>
       {label ? (
-        <RNText size={13} color={THEME.textSecondary} font="medium" style={styles.label}>
+        <RNText
+          size={13}
+          color={colors.textSecondary}
+          font="medium"
+          style={styles.label}>
           {label}
         </RNText>
       ) : null}
+
       <View
         style={[
           styles.inputContainer,
-          {
-            borderColor: error
-              ? THEME.danger
-              : focused
-              ? focusedBorderColor
-              : THEME.border,
-          },
+          {borderColor, backgroundColor: colors.surface},
           inputContainerStyle,
-        ]}
-      >
+        ]}>
         {leftIcon ? <View style={styles.left}>{leftIcon}</View> : null}
         <TextInput
+          testID={testID}
           allowFontScaling={false}
+          // The visible label is the accessible name; the error is announced
+          // after it so a screen-reader user hears why the field is rejected.
+          accessibilityLabel={accessibilityLabel ?? label}
+          accessibilityHint={error}
+          aria-invalid={!!error}
+          aria-errormessage={error ? errorId : undefined}
           {...rest}
-          onFocus={(e) => {
+          onFocus={e => {
             setFocused(true);
             onFocus?.(e);
           }}
-          onBlur={(e) => {
+          onBlur={e => {
             setFocused(false);
             onBlur?.(e);
           }}
-          placeholderTextColor={THEME.textPlaceholder}
+          placeholderTextColor={colors.textPlaceholder}
           secureTextEntry={secure && !secureVisible}
-          style={[styles.input, style]}
+          style={[styles.input, {color: colors.text}, style]}
         />
         {right ? <View style={styles.right}>{right}</View> : null}
       </View>
+
       {error ? (
-        <RNText size={11} color={THEME.danger} style={styles.errorText}>
+        <RNText
+          nativeID={errorId}
+          testID={testID ? `${testID}-error` : undefined}
+          accessibilityLiveRegion="polite"
+          size={11}
+          color={colors.danger}
+          style={styles.errorText}>
           {error}
         </RNText>
       ) : null}
@@ -111,28 +144,26 @@ const RNInput: React.FC<RNInputProps> = ({
 };
 
 export default React.memo(RNInput);
+export type {RNInputProps};
 
 const styles = StyleSheet.create({
-  wrap: { width: "100%" },
-  label: { marginBottom: moderateScale(6) },
+  wrap: {width: '100%'},
+  label: {marginBottom: moderateScale(6)},
   inputContainer: {
-    height: moderateScale(50),
+    minHeight: moderateScale(50),
     paddingHorizontal: moderateScale(18),
     borderRadius: SPACING.radiusPill,
     borderWidth: 1,
-    borderColor: THEME.border,
-    backgroundColor: THEME.surface,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   input: {
     flex: 1,
-    color: THEME.text,
     fontFamily: FONTS.regular,
     fontSize: moderateScale(14, 0.3),
     paddingVertical: 0,
   },
-  left: { marginRight: moderateScale(10) },
-  right: { marginLeft: moderateScale(10) },
-  errorText: { marginTop: moderateScale(6) },
+  left: {marginRight: moderateScale(10)},
+  right: {marginLeft: moderateScale(10)},
+  errorText: {marginTop: moderateScale(6)},
 });

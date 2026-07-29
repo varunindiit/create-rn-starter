@@ -1,16 +1,21 @@
-/** Centralized route names */
+/** Centralised route names. */
 export enum RouteKey {
   /* Stacks */
-  AuthStack = "AuthStack",
-  AppStack = "AppStack",
-  BottomTabs = "BottomTabs",
+  AuthStack = 'AuthStack',
+  AppStack = 'AppStack',
+  BottomTabs = 'BottomTabs',
 
   /* Auth */
-  Login = "Login",
+  Login = 'Login',
 
-  /* User Tabs */
-  UserHome = "Home",
-  UserProfile = "Profile",
+  /* User tabs */
+  UserHome = 'Home',
+  UserProfile = 'Profile',
+
+  /* App stack */
+  // crns:if gallery
+  Gallery = 'Gallery',
+  // crns:endif
 }
 
 export default RouteKey;

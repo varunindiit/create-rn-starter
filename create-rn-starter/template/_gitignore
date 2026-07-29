@@ -41,6 +41,20 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+# Secrets / local environment
+#
+# `.env` is created for you from `.env.example` on scaffold and is where your
+# API base URL and keys live — it must never be committed. Keep `.env.example`
+# tracked as the documented, value-free template.
+.env
+.env.*
+!.env.example
+
+# Release signing (see android/app/build.gradle). Never commit a real keystore
+# or its passwords.
+keystore.properties
+*.jks
+
 # fastlane
 #
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the

@@ -1,0 +1,32 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # Required for npm provenance, which publishes a signed attestation
+      # linking the tarball back to this workflow run and commit.
+      id-token: write
+    defaults:
+      run:
+        working-directory: create-rn-starter
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+      - run: npm install --no-audit --no-fund
+      - name: Verify template is in sync before publishing
+        run: node scripts/sync-template.js --check
+      - run: npm run lint
+      - run: npm run test:unit
+      - run: npm run test:smoke
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

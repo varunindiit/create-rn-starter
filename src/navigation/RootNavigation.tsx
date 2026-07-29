@@ -1,25 +1,33 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React from "react";
-import { THEME } from "../theme";
-import BottomTabs from "./BottomTabs";
-import RouteKey from "./RouteKey";
+import React from 'react';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useTheme} from '../theme/ThemeProvider';
+import BottomTabs from './BottomTabs';
+import RouteKey from './RouteKey';
+import type {RootStackParamList} from './paramLists';
+// crns:if gallery
+import Gallery from '../screen/root/gallery';
+// crns:endif
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 /**
- * Root (authenticated) stack. Hosts the bottom tabs and is the place to add
- * further app-level stack screens (details, settings, etc.) as the app grows.
+ * Root (authenticated) stack. Hosts the bottom tabs and is where app-level
+ * push screens — details, settings — belong as the app grows.
  */
 const RootNavigation = () => {
+  const {colors} = useTheme();
+
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: THEME.background },
-        animation: "slide_from_right",
-      }}
-    >
+        contentStyle: {backgroundColor: colors.background},
+        animation: 'slide_from_right',
+      }}>
       <Stack.Screen name={RouteKey.BottomTabs} component={BottomTabs} />
+      {/* crns:if gallery */}
+      <Stack.Screen name={RouteKey.Gallery} component={Gallery} />
+      {/* crns:endif */}
     </Stack.Navigator>
   );
 };

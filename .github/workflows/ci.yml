@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  # The CLI: pure Node, so it is cheap to matrix across every OS we claim to
+  # support. Windows is here specifically because the package manager shims are
+  # .cmd files and only a real Windows runner catches a spawn regression.
+  cli:
+    name: CLI (node ${{ matrix.node }}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [18, 20, 22]
+    defaults:
+      run:
+        working-directory: create-rn-starter
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install --no-audit --no-fund
+      - name: Lint
+        run: npm run lint
+      - name: Unit tests
+        run: npm run test:unit
+      - name: Smoke test (scaffold + rename, every preset)
+        run: npm run test:smoke
+
+  # The template must stay byte-identical to the app at the repo root.
+  template-sync:
+    name: template/ in sync with root app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node create-rn-starter/scripts/sync-template.js --check
+
+  # The app itself: lint, types and tests.
+  app:
+    name: App (lint, typecheck, test)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: cp .env.example .env
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test -- --ci
+
+  # A generated project must actually build. This is the check that would have
+  # caught a rename that produces a tree Gradle cannot compile.
+  android-build:
+    name: Generated project builds (Android)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Scaffold a project
+        run: |
+          node create-rn-starter/bin/index.js "CI Probe App" \
+            --bundle-id com.ci.probe --preset full --no-pods --no-git -y
+      - name: Install dependencies
+        working-directory: ci-probe-app
+        run: npm install --no-audit --no-fund
+      - name: Assemble debug APK
+        working-directory: ci-probe-app/android
+        run: ./gradlew assembleDebug --no-daemon

@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
-import { SPACING, THEME } from '../../theme';
+import {Platform, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
+import {SPACING} from '../../theme/spacing';
+import {useTheme} from '../../theme/ThemeProvider';
 
 interface CardProps {
   children?: React.ReactNode;
@@ -9,41 +10,52 @@ interface CardProps {
   bg?: string;
   radius?: number;
   shadow?: boolean;
+  testID?: string;
+  /** Set when the card is a meaningful group, so it is announced as one unit. */
+  accessibilityLabel?: string;
 }
 
 const Card: React.FC<CardProps> = ({
   children,
   style,
-  padding,
-  bg = THEME.surface,
+  padding = SPACING.lg,
+  bg,
   radius = SPACING.radiusLg,
-  shadow = false,
-}) => (
-  <View
-    style={[
-      styles.card,
-      shadow && styles.shadow,
-      {
-        backgroundColor: bg,
-        borderRadius: radius,
-        padding: padding ?? SPACING.lg,
-      },
-      style,
-    ]}
-  >
-    {children}
-  </View>
-);
+  shadow = true,
+  testID,
+  accessibilityLabel,
+}) => {
+  const {colors} = useTheme();
+
+  return (
+    <View
+      testID={testID}
+      accessible={!!accessibilityLabel}
+      accessibilityLabel={accessibilityLabel}
+      style={[
+        {
+          padding,
+          borderRadius: radius,
+          backgroundColor: bg ?? colors.surface,
+          borderColor: colors.border,
+        },
+        styles.base,
+        shadow && {shadowColor: colors.shadow, ...styles.shadow},
+        style,
+      ]}>
+      {children}
+    </View>
+  );
+};
 
 export default Card;
+export type {CardProps};
 
 const styles = StyleSheet.create({
-  card: { width: '100%', borderWidth: 1, borderColor: 'rgba(44, 26, 14, 0.1)' },
-  shadow: {
-    shadowColor: THEME.shadow,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 1,
-    shadowRadius: 8,
-    elevation: 2,
-  },
+  base: {borderWidth: StyleSheet.hairlineWidth},
+  shadow: Platform.select({
+    ios: {shadowOpacity: 0.08, shadowRadius: 10, shadowOffset: {width: 0, height: 3}},
+    android: {elevation: 2},
+    default: {},
+  }),
 });

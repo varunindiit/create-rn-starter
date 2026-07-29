@@ -1,6 +1,6 @@
 {
   "name": "@varunindiit/create-rn-starter",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "publishConfig": {
     "access": "public"
   },
@@ -12,11 +12,18 @@
   "files": [
     "bin",
     "lib",
-    "template"
+    "template",
+    "scripts",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
-    "lint": "node --check bin/index.js && node --check lib/utils.js && node --check lib/prompt.js && node --check lib/rename.js && node --check lib/scaffold.js && node --check scripts/smoke.js",
-    "test": "node scripts/smoke.js"
+    "lint": "eslint bin lib scripts",
+    "test": "npm run test:unit && npm run test:smoke",
+    "test:unit": "node --test test/*.test.js",
+    "test:smoke": "node scripts/smoke.js",
+    "sync": "node scripts/sync-template.js",
+    "sync:check": "node scripts/sync-template.js --check"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -28,11 +35,28 @@
     "template",
     "boilerplate",
     "redux",
+    "redux-toolkit",
+    "rtk-query",
     "react-navigation",
     "typescript",
     "scaffold",
-    "cli"
+    "cli",
+    "dark-mode",
+    "i18n",
+    "accessibility"
   ],
-  "author": "",
-  "license": "MIT"
+  "author": "varunindiit <vp@indiit.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/varunindiit/create-rn-starter.git",
+    "directory": "create-rn-starter"
+  },
+  "homepage": "https://github.com/varunindiit/create-rn-starter#readme",
+  "bugs": {
+    "url": "https://github.com/varunindiit/create-rn-starter/issues"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1"
+  }
 }

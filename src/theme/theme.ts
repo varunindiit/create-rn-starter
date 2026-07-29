@@ -1,53 +1,18 @@
+import {ColorScheme, lightColors} from './palettes';
+
 /**
- * HD WAKA — design tokens
- * Brand: warm orange on cream/peach. Cards are white with subtle shadows.
+ * Static colour access.
+ *
+ * Prefer `useTheme()` inside components — it follows the active light/dark
+ * scheme. `COLORS`/`THEME` resolve to the light palette and exist for the
+ * places a hook cannot reach: navigator `screenOptions` defaults, module-level
+ * constants, and non-React helpers.
  */
-export const COLORS = {
-  // Brand
-  primary: "rgba(232, 124, 62, 1)",
-  primaryDark: "rgba(196, 82, 26, 1)",
-  primaryLight: "#FCE4D2",
-  primaryFaint: "#FFF3EA",
+export const COLORS = lightColors;
 
-  // Backgrounds
-  background: "#FBE9D6",
-  backgroundAlt: "#FFF6EC",
-  surface: "rgba(255, 251, 249, 1)",
-  surfaceMuted: "#FAF7F4",
-  overlay: "rgba(0,0,0,0.45)",
+export const THEME = COLORS;
 
-  // Text
-  text: "rgba(44, 26, 14, 1)",
-  textSecondary: "#5C5C5C",
-  textMuted: "#9A9A9A",
-  textPlaceholder: "#BDBDBD",
-  textOnPrimary: "#FFFFFF",
+export type ThemeType = ColorScheme;
 
-  // Borders / Lines
-  border: "#F2DDC8",
-  divider: "#F0EAE3",
-  inputBorder: "#EADFD2",
-
-  // Status
-  success: "#1FA971",
-  successLight: "#E7F8F0",
-  warning: "#F4B400",
-  warningLight: "#FFF6DA",
-  danger: "#E5484D",
-  dangerLight: "#FDECEC",
-  info: "#2D7FF9",
-
-  // Misc
-  star: "#F4B400",
-  unselectedStar: "#E5DAC9",
-  shadow: "rgba(28, 22, 14, 0.10)",
-
-  // Tab bar
-  tabBg: "#FFFFFF",
-};
-
-export const THEME = {
-  ...COLORS,
-};
-
-export type ThemeType = typeof THEME;
+export type {ColorScheme, ThemeMode, ResolvedScheme} from './palettes';
+export {lightColors, darkColors, PALETTES} from './palettes';
