@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Image,
   StyleProp,
@@ -6,12 +6,14 @@ import {
   TouchableOpacity,
   View,
   ViewStyle,
-} from "react-native";
-import { moderateScale } from "react-native-size-matters";
-import { SPACING, THEME } from "../../theme";
-import RNText from "../Text/RNText";
-import { CloseIcon, CloudUploadIcon } from "../Icon/SvgIcons";
-import { useLanguage } from "../../localization";
+} from 'react-native';
+import {moderateScale} from 'react-native-size-matters';
+import {SPACING} from '../../theme';
+import RNText from '../Text/RNText';
+import {CloseIcon, CloudUploadIcon} from '../Icon/SvgIcons';
+import {useLanguage} from '../../localization';
+import {useTheme, useThemedStyles} from '../../theme/ThemeProvider';
+import type {ColorScheme} from '../../theme/palettes';
 
 interface UploadBoxProps {
   title: string;
@@ -37,17 +39,15 @@ const UploadBox: React.FC<UploadBoxProps> = ({
   height = moderateScale(130),
   containerStyle,
 }) => {
-  const { t } = useLanguage();
-  const hintText = hint ?? t("common.uploadFormatsHint");
+  const {colors} = useTheme();
+  const styles = useThemedStyles(makeStyles);
+  const {t} = useLanguage();
+  const hintText = hint ?? t('common.uploadFormatsHint');
   if (imageUri) {
     return (
-      <View style={[styles.box, styles.filled, { height }, containerStyle]}>
-        <Image source={{ uri: imageUri }} style={StyleSheet.absoluteFill} />
-        <TouchableOpacity
-          style={styles.remove}
-          onPress={onRemove}
-          hitSlop={8}
-        >
+      <View style={[styles.box, styles.filled, {height}, containerStyle]}>
+        <Image source={{uri: imageUri}} style={StyleSheet.absoluteFill} />
+        <TouchableOpacity style={styles.remove} onPress={onRemove} hitSlop={8}>
           <CloseIcon size={moderateScale(14)} color="#fff" />
         </TouchableOpacity>
       </View>
@@ -58,14 +58,13 @@ const UploadBox: React.FC<UploadBoxProps> = ({
     <TouchableOpacity
       activeOpacity={0.8}
       onPress={onPress}
-      style={[styles.box, { height }, containerStyle]}
-    >
-      <CloudUploadIcon size={moderateScale(28)} color={THEME.primary} />
-      <RNText font="bold" size={14} color={THEME.text} style={styles.title}>
+      style={[styles.box, {height}, containerStyle]}>
+      <CloudUploadIcon size={moderateScale(28)} color={colors.primary} />
+      <RNText font="bold" size={14} color={colors.text} style={styles.title}>
         {title}
       </RNText>
       {hintText ? (
-        <RNText size={12} color={THEME.textSecondary} style={styles.hint}>
+        <RNText size={12} color={colors.textSecondary} style={styles.hint}>
           {hintText}
         </RNText>
       ) : null}
@@ -75,32 +74,33 @@ const UploadBox: React.FC<UploadBoxProps> = ({
 
 export default UploadBox;
 
-const styles = StyleSheet.create({
-  box: {
-    borderRadius: SPACING.radiusLg,
-    borderWidth: 1.5,
-    borderColor: THEME.primary,
-    borderStyle: "dashed",
-    backgroundColor: THEME.primaryFaint,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: moderateScale(16),
-  },
-  filled: {
-    overflow: "hidden",
-    backgroundColor: THEME.surfaceMuted,
-  },
-  title: { marginTop: moderateScale(10) },
-  hint: { marginTop: moderateScale(4) },
-  remove: {
-    position: "absolute",
-    top: moderateScale(8),
-    right: moderateScale(8),
-    width: moderateScale(24),
-    height: moderateScale(24),
-    borderRadius: moderateScale(12),
-    backgroundColor: THEME.primary,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+const makeStyles = (colors: ColorScheme) =>
+  StyleSheet.create({
+    box: {
+      borderRadius: SPACING.radiusLg,
+      borderWidth: 1.5,
+      borderColor: colors.primary,
+      borderStyle: 'dashed',
+      backgroundColor: colors.primaryFaint,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: moderateScale(16),
+    },
+    filled: {
+      overflow: 'hidden',
+      backgroundColor: colors.surfaceMuted,
+    },
+    title: {marginTop: moderateScale(10)},
+    hint: {marginTop: moderateScale(4)},
+    remove: {
+      position: 'absolute',
+      top: moderateScale(8),
+      right: moderateScale(8),
+      width: moderateScale(24),
+      height: moderateScale(24),
+      borderRadius: moderateScale(12),
+      backgroundColor: colors.primary,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  });

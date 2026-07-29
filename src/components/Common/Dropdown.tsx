@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, {useCallback, useState} from 'react';
 import {
   Pressable,
   StyleProp,
@@ -6,12 +6,14 @@ import {
   TouchableOpacity,
   View,
   ViewStyle,
-} from "react-native";
-import { moderateScale } from "react-native-size-matters";
-import { SPACING, THEME } from "../../theme";
-import RNText from "../Text/RNText";
-import BottomSheet from "../BottomSheet/BottomSheet";
-import ArrowDownSvg from "../../assets/svg/arrowDown.svg";
+} from 'react-native';
+import {moderateScale} from 'react-native-size-matters';
+import {SPACING} from '../../theme';
+import RNText from '../Text/RNText';
+import BottomSheet from '../BottomSheet/BottomSheet';
+import ArrowDownSvg from '../../assets/svg/arrowDown.svg';
+import {useTheme, useThemedStyles} from '../../theme/ThemeProvider';
+import type {ColorScheme} from '../../theme/palettes';
 
 export interface DropdownOption {
   label: string;
@@ -36,7 +38,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   value,
   options,
   onChange,
-  placeholder = "Select",
+  placeholder = 'Select',
   title,
   leftIcon,
   rightIcon,
@@ -45,9 +47,11 @@ const Dropdown: React.FC<DropdownProps> = ({
   containerStyle,
   triggerStyle,
 }) => {
+  const {colors} = useTheme();
+  const styles = useThemedStyles(makeStyles);
   const [visible, setVisible] = useState(false);
 
-  const selected = options.find((o) => o.value === value);
+  const selected = options.find(o => o.value === value);
 
   const open = useCallback(() => {
     if (!disabled) setVisible(true);
@@ -70,29 +74,24 @@ const Dropdown: React.FC<DropdownProps> = ({
         disabled={disabled}
         style={[
           styles.trigger,
-          { borderColor: error ? THEME.danger : THEME.inputBorder },
+          {borderColor: error ? colors.danger : colors.inputBorder},
           triggerStyle,
-        ]}
-      >
+        ]}>
         {leftIcon ? <View style={styles.left}>{leftIcon}</View> : null}
         <RNText
           size={14}
           font="regular"
-          color={selected ? THEME.text : THEME.textPlaceholder}
-          style={styles.triggerText}
-        >
+          color={selected ? colors.text : colors.textPlaceholder}
+          style={styles.triggerText}>
           {selected ? selected.label : placeholder}
         </RNText>
         {rightIcon ?? (
-          <ArrowDownSvg
-            width={moderateScale(18)}
-            height={moderateScale(18)}
-          />
+          <ArrowDownSvg width={moderateScale(18)} height={moderateScale(18)} />
         )}
       </TouchableOpacity>
 
       {error ? (
-        <RNText size={11} color={THEME.danger} style={styles.errorText}>
+        <RNText size={11} color={colors.danger} style={styles.errorText}>
           {error}
         </RNText>
       ) : null}
@@ -102,29 +101,26 @@ const Dropdown: React.FC<DropdownProps> = ({
           <RNText
             font="semibold"
             size={18}
-            color={THEME.text}
-            style={styles.sheetTitle}
-          >
+            color={colors.text}
+            style={styles.sheetTitle}>
             {title}
           </RNText>
         ) : null}
 
-        {options.map((opt) => {
+        {options.map(opt => {
           const active = opt.value === value;
           return (
             <Pressable
               key={opt.value}
               onPress={() => handleSelect(opt.value)}
-              style={({ pressed }) => [
+              style={({pressed}) => [
                 styles.option,
-                pressed && { backgroundColor: THEME.primaryFaint },
-              ]}
-            >
+                pressed && {backgroundColor: colors.primaryFaint},
+              ]}>
               <RNText
                 size={15}
-                font={active ? "semibold" : "regular"}
-                color={active ? THEME.primary : THEME.text}
-              >
+                font={active ? 'semibold' : 'regular'}
+                color={active ? colors.primary : colors.text}>
                 {opt.label}
               </RNText>
             </Pressable>
@@ -137,25 +133,26 @@ const Dropdown: React.FC<DropdownProps> = ({
 
 export default Dropdown;
 
-const styles = StyleSheet.create({
-  trigger: {
-    height: moderateScale(50),
-    borderRadius: SPACING.radiusPill,
-    borderWidth: 1,
-    backgroundColor: THEME.surface,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: moderateScale(18),
-  },
-  left: { marginRight: moderateScale(10) },
-  triggerText: { flex: 1 },
-  errorText: { marginTop: moderateScale(6) },
-  sheetTitle: {
-    marginBottom: moderateScale(12),
-  },
-  option: {
-    paddingVertical: moderateScale(14),
-    borderBottomWidth: 1,
-    borderBottomColor: THEME.divider,
-  },
-});
+const makeStyles = (colors: ColorScheme) =>
+  StyleSheet.create({
+    trigger: {
+      height: moderateScale(50),
+      borderRadius: SPACING.radiusPill,
+      borderWidth: 1,
+      backgroundColor: colors.surface,
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: moderateScale(18),
+    },
+    left: {marginRight: moderateScale(10)},
+    triggerText: {flex: 1},
+    errorText: {marginTop: moderateScale(6)},
+    sheetTitle: {
+      marginBottom: moderateScale(12),
+    },
+    option: {
+      paddingVertical: moderateScale(14),
+      borderBottomWidth: 1,
+      borderBottomColor: colors.divider,
+    },
+  });

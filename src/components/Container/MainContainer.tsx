@@ -54,7 +54,9 @@ const MainContainer: React.FC<MainContainerProps> = memo(
           style,
         ]}>
         <StatusBar
-          barStyle={statusBarStyle ?? (isDark ? 'light-content' : 'dark-content')}
+          barStyle={
+            statusBarStyle ?? (isDark ? 'light-content' : 'dark-content')
+          }
           backgroundColor="transparent"
           translucent
         />

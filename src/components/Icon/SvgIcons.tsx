@@ -1,5 +1,5 @@
-import React from "react";
-import Svg, { Path, Circle, Rect } from "react-native-svg";
+import React from 'react';
+import Svg, {Path, Circle, Rect} from 'react-native-svg';
 
 export interface IconProps {
   size?: number;
@@ -13,7 +13,7 @@ export interface IconProps {
 
 export const ChevronLeftIcon: React.FC<IconProps> = ({
   size = 18,
-  color = "#FFFFFF",
+  color = '#FFFFFF',
 }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <Path
@@ -28,7 +28,7 @@ export const ChevronLeftIcon: React.FC<IconProps> = ({
 
 export const ChevronRightIcon: React.FC<IconProps> = ({
   size = 18,
-  color = "#FFFFFF",
+  color = '#FFFFFF',
 }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <Path
@@ -43,7 +43,7 @@ export const ChevronRightIcon: React.FC<IconProps> = ({
 
 export const ChevronDownIcon: React.FC<IconProps> = ({
   size = 18,
-  color = "#FFFFFF",
+  color = '#FFFFFF',
 }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <Path
@@ -58,7 +58,7 @@ export const ChevronDownIcon: React.FC<IconProps> = ({
 
 export const CloseIcon: React.FC<IconProps> = ({
   size = 18,
-  color = "#94A6B1",
+  color = '#94A6B1',
 }) => (
   <Svg width={size} height={size} viewBox="0 0 18 18" fill="none">
     <Path
@@ -73,7 +73,7 @@ export const CloseIcon: React.FC<IconProps> = ({
 
 export const PlusIcon: React.FC<IconProps> = ({
   size = 22,
-  color = "#FFFFFF",
+  color = '#FFFFFF',
 }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <Path
@@ -87,7 +87,7 @@ export const PlusIcon: React.FC<IconProps> = ({
 
 export const CheckIcon: React.FC<IconProps> = ({
   size = 16,
-  color = "#FFFFFF",
+  color = '#FFFFFF',
 }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <Path
@@ -102,7 +102,7 @@ export const CheckIcon: React.FC<IconProps> = ({
 
 export const EyeIcon: React.FC<IconProps> = ({
   size = 20,
-  color = "#7C7BA4",
+  color = '#7C7BA4',
 }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <Path
@@ -118,7 +118,7 @@ export const EyeIcon: React.FC<IconProps> = ({
 
 export const EyeOffIcon: React.FC<IconProps> = ({
   size = 20,
-  color = "#7C7BA4",
+  color = '#7C7BA4',
 }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <Path
@@ -139,7 +139,7 @@ export const EyeOffIcon: React.FC<IconProps> = ({
 
 export const CameraIcon: React.FC<IconProps> = ({
   size = 18,
-  color = "#FFFFFF",
+  color = '#FFFFFF',
 }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <Path
@@ -155,7 +155,7 @@ export const CameraIcon: React.FC<IconProps> = ({
 
 export const CloudUploadIcon: React.FC<IconProps> = ({
   size = 28,
-  color = "#E87C3E",
+  color = '#E87C3E',
 }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <Path
@@ -177,7 +177,7 @@ export const CloudUploadIcon: React.FC<IconProps> = ({
 
 export const GalleryIcon: React.FC<IconProps> = ({
   size = 20,
-  color = "#FFFFFF",
+  color = '#FFFFFF',
 }) => (
   <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <Rect

@@ -54,7 +54,11 @@ export type {CardProps};
 const styles = StyleSheet.create({
   base: {borderWidth: StyleSheet.hairlineWidth},
   shadow: Platform.select({
-    ios: {shadowOpacity: 0.08, shadowRadius: 10, shadowOffset: {width: 0, height: 3}},
+    ios: {
+      shadowOpacity: 0.08,
+      shadowRadius: 10,
+      shadowOffset: {width: 0, height: 3},
+    },
     android: {elevation: 2},
     default: {},
   }),

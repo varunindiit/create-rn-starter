@@ -49,7 +49,11 @@ class ErrorBoundary extends React.Component<Props, State> {
 
     return (
       <View style={styles.root} testID="error-boundary-fallback">
-        <RNText font="bold" size={20} color={lightColors.text} textAlign="center">
+        <RNText
+          font="bold"
+          size={20}
+          color={lightColors.text}
+          textAlign="center">
           Something went wrong
         </RNText>
         <RNText

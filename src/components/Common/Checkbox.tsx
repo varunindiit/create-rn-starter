@@ -1,56 +1,56 @@
-import React from "react";
-import { Pressable, StyleSheet, View } from "react-native";
-import { moderateScale } from "react-native-size-matters";
-import { THEME } from "../../theme";
-import { CheckIcon } from "../Icon/SvgIcons";
-import RNText from "../Text/RNText";
+import React from 'react';
+import {Pressable, StyleSheet, View} from 'react-native';
+import {moderateScale} from 'react-native-size-matters';
+
+import {CheckIcon} from '../Icon/SvgIcons';
+import RNText from '../Text/RNText';
+import {useTheme} from '../../theme/ThemeProvider';
 
 interface CheckboxProps {
   value: boolean;
   onChange: (v: boolean) => void;
   label?: string;
-  shape?: "square" | "circle";
+  shape?: 'square' | 'circle';
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
   value,
   onChange,
   label,
-  shape = "circle",
-}) => (
-  <Pressable
-    onPress={() => onChange(!value)}
-    style={styles.row}
-    hitSlop={8}
-  >
-    <View
-      style={[
-        styles.box,
-        shape === "circle" && styles.boxCircle,
-        {
-          backgroundColor: value ? THEME.primary : THEME.surface,
-          borderColor: value ? THEME.primary : THEME.inputBorder,
-        },
-      ]}
-    >
-      {value ? (
-        <CheckIcon size={moderateScale(12)} color={THEME.textOnPrimary} />
+  shape = 'circle',
+}) => {
+  const {colors} = useTheme();
+
+  return (
+    <Pressable onPress={() => onChange(!value)} style={styles.row} hitSlop={8}>
+      <View
+        style={[
+          styles.box,
+          shape === 'circle' && styles.boxCircle,
+          {
+            backgroundColor: value ? colors.primary : colors.surface,
+            borderColor: value ? colors.primary : colors.inputBorder,
+          },
+        ]}>
+        {value ? (
+          <CheckIcon size={moderateScale(12)} color={colors.textOnPrimary} />
+        ) : null}
+      </View>
+      {label ? (
+        <RNText size={13} color={colors.textSecondary}>
+          {label}
+        </RNText>
       ) : null}
-    </View>
-    {label ? (
-      <RNText size={13} color={THEME.textSecondary}>
-        {label}
-      </RNText>
-    ) : null}
-  </Pressable>
-);
+    </Pressable>
+  );
+};
 
 export default Checkbox;
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: moderateScale(8),
   },
   box: {
@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
     height: moderateScale(20),
     borderRadius: moderateScale(5),
     borderWidth: 1.5,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  boxCircle: { borderRadius: moderateScale(10) },
+  boxCircle: {borderRadius: moderateScale(10)},
 });

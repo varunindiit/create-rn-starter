@@ -58,7 +58,11 @@ const Toggle: React.FC<ToggleProps> = ({
         disabled && styles.disabled,
       ]}>
       <Animated.View
-        style={[styles.thumb, {backgroundColor: colors.toggleThumb}, thumbStyle]}
+        style={[
+          styles.thumb,
+          {backgroundColor: colors.toggleThumb},
+          thumbStyle,
+        ]}
       />
     </Pressable>
   );

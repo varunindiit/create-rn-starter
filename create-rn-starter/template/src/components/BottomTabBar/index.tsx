@@ -132,6 +132,10 @@ const styles = StyleSheet.create({
     }),
   },
   item: {flex: 1, alignItems: 'center', justifyContent: 'center'},
-  iconWrap: {alignItems: 'center', justifyContent: 'center', gap: moderateScale(2)},
+  iconWrap: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: moderateScale(2),
+  },
   label: {marginTop: moderateScale(2)},
 });

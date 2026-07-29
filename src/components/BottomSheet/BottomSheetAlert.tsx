@@ -1,10 +1,11 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { moderateScale } from "react-native-size-matters";
-import { SPACING, THEME } from "../../theme";
-import { RNButton } from "../Button";
-import RNText from "../Text/RNText";
-import BottomSheet from "./BottomSheet";
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {moderateScale} from 'react-native-size-matters';
+import {SPACING} from '../../theme';
+import {RNButton} from '../Button';
+import RNText from '../Text/RNText';
+import BottomSheet from './BottomSheet';
+import {useTheme} from '../../theme/ThemeProvider';
 
 interface BottomSheetAlertProps {
   visible: boolean;
@@ -24,13 +25,14 @@ const BottomSheetAlert: React.FC<BottomSheetAlertProps> = ({
   onClose,
   title,
   description,
-  confirmText = "Yes",
-  cancelText = "No",
+  confirmText = 'Yes',
+  cancelText = 'No',
   onConfirm,
   onCancel,
   loading,
   destructive,
 }) => {
+  const {colors} = useTheme();
   const handleCancel = () => {
     onCancel?.();
     onClose();
@@ -41,20 +43,18 @@ const BottomSheetAlert: React.FC<BottomSheetAlertProps> = ({
       <RNText
         font="semibold"
         size={20}
-        color={THEME.text}
+        color={colors.text}
         textAlign="center"
-        style={styles.title}
-      >
+        style={styles.title}>
         {title}
       </RNText>
 
       {description ? (
         <RNText
           size={13}
-          color={THEME.textSecondary}
+          color={colors.textSecondary}
           textAlign="center"
-          style={styles.description}
-        >
+          style={styles.description}>
           {description}
         </RNText>
       ) : null}
@@ -70,7 +70,7 @@ const BottomSheetAlert: React.FC<BottomSheetAlertProps> = ({
         <RNButton
           title={confirmText}
           containerStyle={styles.btn}
-          variant={destructive ? "primary" : "primary"}
+          variant={destructive ? 'primary' : 'primary'}
           onPress={onConfirm}
           loading={loading}
         />
@@ -82,19 +82,19 @@ const BottomSheetAlert: React.FC<BottomSheetAlertProps> = ({
 export default BottomSheetAlert;
 
 const styles = StyleSheet.create({
-  title: { marginTop: moderateScale(6) },
+  title: {marginTop: moderateScale(6)},
   description: {
     marginTop: moderateScale(8),
     paddingHorizontal: moderateScale(8),
     lineHeight: moderateScale(20),
   },
   btnRow: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: moderateScale(10),
     marginTop: moderateScale(20),
   },
   btn: {
-    width: "50%",
+    width: '50%',
     borderRadius: SPACING.radiusPill,
   },
 });

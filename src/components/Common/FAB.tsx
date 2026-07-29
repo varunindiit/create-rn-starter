@@ -1,8 +1,9 @@
-import React from "react";
-import { Pressable, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { moderateScale } from "react-native-size-matters";
-import { THEME } from "../../theme";
-import { PlusIcon } from "../Icon/SvgIcons";
+import React from 'react';
+import {Pressable, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
+import {moderateScale} from 'react-native-size-matters';
+
+import {PlusIcon} from '../Icon/SvgIcons';
+import {useTheme} from '../../theme/ThemeProvider';
 
 interface FABProps {
   onPress?: () => void;
@@ -11,7 +12,8 @@ interface FABProps {
   children?: React.ReactNode;
 }
 
-const FAB: React.FC<FABProps> = ({ onPress, style, size = 56, children }) => {
+const FAB: React.FC<FABProps> = ({onPress, style, size = 56, children}) => {
+  const {colors} = useTheme();
   const dim = moderateScale(size);
   const ringPad = moderateScale(6);
   const outerDim = dim + ringPad * 2;
@@ -26,8 +28,7 @@ const FAB: React.FC<FABProps> = ({ onPress, style, size = 56, children }) => {
           padding: ringPad,
         },
         style,
-      ]}
-    >
+      ]}>
       <Pressable
         onPress={onPress}
         style={[
@@ -36,12 +37,11 @@ const FAB: React.FC<FABProps> = ({ onPress, style, size = 56, children }) => {
             width: dim,
             height: dim,
             borderRadius: dim / 2,
-            backgroundColor: THEME.primary,
+            backgroundColor: colors.primary,
           },
-        ]}
-      >
+        ]}>
         {children ?? (
-          <PlusIcon size={moderateScale(24)} color={THEME.textOnPrimary} />
+          <PlusIcon size={moderateScale(24)} color={colors.textOnPrimary} />
         )}
       </Pressable>
     </View>
@@ -52,17 +52,17 @@ export default FAB;
 
 const styles = StyleSheet.create({
   halo: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(242, 107, 42, 0.18)",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(242, 107, 42, 0.18)',
   },
   fab: {
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#F26B2A",
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#F26B2A',
     shadowOpacity: 0.35,
     shadowRadius: 14,
-    shadowOffset: { width: 0, height: 8 },
+    shadowOffset: {width: 0, height: 8},
     elevation: 8,
   },
 });
