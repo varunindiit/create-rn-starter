@@ -42,11 +42,11 @@ function checkNode() {
   if (cmp(version, "18.0.0") < 0) {
     return { level: "fail", label: "Node.js", detail: `${version} (need ≥ 18)` };
   }
-  if (cmp(version, "20.19.4") < 0) {
+  if (cmp(version, "22.13.0") < 0) {
     return {
       level: "warn",
       label: "Node.js",
-      detail: `${version} — React Native 0.85 wants ≥ 20.19.4`,
+      detail: `${version} — React Native 0.88 wants ≥ 22.13.0`,
     };
   }
   return { level: "ok", label: "Node.js", detail: version };

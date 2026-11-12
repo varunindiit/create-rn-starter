@@ -31,7 +31,7 @@ npx @varunindiit/create-rn-starter doctor
 
 ## What you get
 
-A real, runnable RN **0.85** project (New Architecture) with:
+A real, runnable RN **0.88** project (New Architecture) with:
 
 - **Navigation** — React Navigation native-stack + bottom tabs, fully typed
   (`RootParamList` is registered globally, so even `useNavigation()` in a shared

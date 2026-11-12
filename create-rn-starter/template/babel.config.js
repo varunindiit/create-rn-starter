@@ -43,6 +43,9 @@ module.exports = {
         allowUndefined: true,
       },
     ],
+    // RN 0.88's Metro import/export transform can't handle `export * as ns`
+    // (used by zod), so lower it first.
+    '@babel/plugin-transform-export-namespace-from',
     // Must stay last — the worklets plugin has to see the final AST.
     'react-native-worklets/plugin',
   ],

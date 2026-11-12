@@ -1,9 +1,9 @@
 import React, {useRef, useState} from 'react';
 import {
-  NativeSyntheticEvent,
   StyleSheet,
   TextInput,
-  TextInputKeyPressEventData,
+  type TextInputInstance,
+  type TextInputKeyPressEvent,
   View,
 } from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
@@ -30,7 +30,7 @@ const OtpInput: React.FC<OtpInputProps> = ({
 }) => {
   const {colors} = useTheme();
   const styles = useThemedStyles(makeStyles);
-  const inputs = useRef<Array<TextInput | null>>([]);
+  const inputs = useRef<Array<TextInputInstance | null>>([]);
   const [focusIndex, setFocusIndex] = useState(autoFocus ? 0 : -1);
 
   const setCharAt = (i: number, c: string) => {
@@ -53,7 +53,7 @@ const OtpInput: React.FC<OtpInputProps> = ({
   };
 
   const handleKeyPress = (
-    e: NativeSyntheticEvent<TextInputKeyPressEventData>,
+    e: TextInputKeyPressEvent,
     index: number,
   ) => {
     if (e.nativeEvent.key === 'Backspace' && !value[index] && index > 0) {

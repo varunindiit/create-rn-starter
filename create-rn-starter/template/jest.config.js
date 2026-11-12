@@ -1,9 +1,9 @@
 module.exports = {
   preset: '@react-native/jest-preset',
   // Reanimated 4 runs on the Worklets runtime, whose `.native` entrypoints
-  // need a real JSI host. This resolver (shipped by the package) points Jest
-  // at the plain-JS implementations instead.
-  resolver: 'react-native-worklets/jest/resolver.js',
+  // need a real JSI host. This resolver (shipped by Reanimated, wrapping the
+  // Worklets one) points Jest at the plain-JS implementations instead.
+  resolver: 'react-native-reanimated/jest/resolver.js',
   // Only scan the app itself. Without this, a checkout of this repo would also
   // walk the packaged copy under create-rn-starter/template.
   roots: ['<rootDir>/src', '<rootDir>/__tests__'],
